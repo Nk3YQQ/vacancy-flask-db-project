@@ -62,7 +62,9 @@ def create_engine_url(sett: SQLEngineSettings) -> str:
 
 
 ENGINE_PATH = Path(__file__).parent.parent.joinpath("engine_settings")
-settings = get_engine_settings(ENGINE_PATH)
+SETTINGS = get_engine_settings(ENGINE_PATH)
 
-ENGINE_URL = create_engine_url(settings.sql_engine_settings)
+ENGINE_URL = create_engine_url(SETTINGS.sql_engine_settings)
 sql_engine = create_engine(ENGINE_URL)
+
+mongo_settings = SETTINGS.mongo_engine_settings
