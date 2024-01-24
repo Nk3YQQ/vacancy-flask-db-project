@@ -61,7 +61,7 @@ def create_engine_url(sett: SQLEngineSettings) -> str:
     return f"{sett.dialect}+{sett.driver}://{sett.user}:{sett.password}@{sett.host}:{sett.port}/{sett.db_name}"
 
 
-ENGINE_PATH = Path(__file__).parent.parent.joinpath("engine_settings")
+ENGINE_PATH = Path(__file__).parent.parent.joinpath("engine_config")
 SETTINGS = get_engine_settings(ENGINE_PATH)
 
 ENGINE_URL = create_engine_url(SETTINGS.sql_engine_settings)
