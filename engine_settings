@@ -1,9 +1,0 @@
-DIALECT=postgresql
-DRIVER=psycopg2
-USER=postgres
-PASS=5674
-SQL_HOST=localhost
-MONGODB_HOST=mongodb://localhost:27017
-PORT=5432
-DATABASE_NAME=vacancy_db
-COLLECTION_NAME=employers
