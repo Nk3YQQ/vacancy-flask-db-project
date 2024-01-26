@@ -1,6 +1,7 @@
 import pymongo
+from bson import ObjectId
 
-from settings.basic import MongoEngineSettings
+from settings.basic import MongoEngineSettings, object_id
 
 
 class MongoManager:
@@ -14,3 +15,8 @@ class MongoManager:
         Метод возвращает список с id работодателей hh.ru
         """
         return list(self._collection.find())[0].get("employers_id")
+
+    def add_vacancies(self, employer_id):
+        self._collection.update_one(
+            {"_id": ObjectId(object_id)}, {"$push": {"employers_id": employer_id}}
+        )
