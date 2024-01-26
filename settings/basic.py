@@ -1,7 +1,7 @@
+from dataclasses import dataclass
 from pathlib import Path
 
 from environs import Env
-from dataclasses import dataclass
 from sqlalchemy import create_engine
 
 
@@ -44,13 +44,13 @@ def get_engine_settings(path: Path) -> Settings:
             password=env.str("PASS"),
             host=env.str("SQL_HOST"),
             port=env.str("PORT"),
-            db_name=env.str("DATABASE_NAME")
+            db_name=env.str("DATABASE_NAME"),
         ),
         MongoEngineSettings(
             host=env.str("MONGODB_HOST"),
             db_name=env.str("DATABASE_NAME"),
-            collection_name=env.str("COLLECTION_NAME")
-        )
+            collection_name=env.str("COLLECTION_NAME"),
+        ),
     )
 
 
