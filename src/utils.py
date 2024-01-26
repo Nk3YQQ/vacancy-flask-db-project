@@ -1,7 +1,3 @@
-from dbmanager.mongodb import MongoManager
-from settings.basic import mongo_settings
-
-
 def make_salary(salary: dict) -> int:
     """
     Функция принимает словарь, берёт данные из блока "Зарплата" и преобразует в строку
@@ -16,5 +12,16 @@ def make_salary(salary: dict) -> int:
         return round(int(salary["to"]) + int(salary["from"]) / 2)
 
 
-def get_employers_id():
-    return MongoManager(mongo_settings).get_employers_id()
+def handle_array(array):
+    return list(
+        map(
+            lambda x: {
+                "vacancy_id": x.vacancy_id,
+                "employer_id": x.employer_id,
+                "name": x.name,
+                "salary": x.salary,
+                "requirements": x.requirements,
+            },
+            array,
+        )
+    )
