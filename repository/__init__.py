@@ -1,5 +1,3 @@
-from sqlalchemy.orm import sessionmaker
-from sqlalchemy import Engine
 from abc import ABC, abstractmethod
 
 
@@ -18,8 +16,8 @@ class Repository(ABC):
 
 
 class EmployerRepository(Repository):
-    def __init__(self, engine: Engine, model):
-        self._session = sessionmaker(engine)
+    def __init__(self, session, model):
+        self._session = session
         self._model = model
 
     def save(self, entity):
@@ -33,13 +31,17 @@ class EmployerRepository(Repository):
 
     def find(self, entity, model):
         with self._session() as session:
-            potential_entity = session.query(model).filter(model.employer_id == entity.employer_id).first()
+            potential_entity = (
+                session.query(model)
+                .filter(model.employer_id == entity.employer_id)
+                .first()
+            )
             return True if potential_entity else False
 
 
 class VacancyRepository(Repository):
-    def __init__(self, engine: Engine, model):
-        self._session = sessionmaker(engine)
+    def __init__(self, session, model):
+        self._session = session
         self._model = model
 
     def save(self, entity):
@@ -53,5 +55,9 @@ class VacancyRepository(Repository):
 
     def find(self, entity, model):
         with self._session() as session:
-            potential_entity = session.query(model).filter(model.vacancy_id == entity.vacancy_id).first()
+            potential_entity = (
+                session.query(model)
+                .filter(model.vacancy_id == entity.vacancy_id)
+                .first()
+            )
             return True if potential_entity else False
