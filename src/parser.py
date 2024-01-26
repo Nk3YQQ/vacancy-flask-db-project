@@ -22,7 +22,7 @@ class Parser:
         for employer_url in self._employers_urls:
             raw_employer = json.loads(requests.get(employer_url).content)
             new_employer = employer(
-                employer_id=raw_employer["id"], name=raw_employer["name"]
+                employer_id=raw_employer["id"], employer_name=raw_employer["name"]
             )
             if repository.find(new_employer, employer):
                 continue
@@ -36,7 +36,7 @@ class Parser:
                 new_vacancy = vacancy(
                     vacancy_id=raw_vacancy["id"],
                     employer_id=raw_vacancy["employer"]["id"],
-                    name=raw_vacancy["name"],
+                    vacancy_name=raw_vacancy["name"],
                     salary=make_salary(raw_vacancy["salary"]),
                     requirements=raw_vacancy["snippet"]["requirement"],
                 )
