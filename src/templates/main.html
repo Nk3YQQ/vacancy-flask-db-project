@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Главная</title>
+</head>
+<body>
+    <div>
+        <a href="{{ url_for('companies_and_vacancies') }}">Получить данные о количество вакансий компании</a>
+    </div>
+    <div>
+        <a href="{{ url_for('vacancies') }}">Получить список всех вакансий</a>
+    </div>
+    <div>
+        <a href="{{ url_for('average_salary') }}">Получить среднюю зарплату всех вакансий</a>
+    </div>
+    <div>
+        <a href="{{ url_for('high_salary_vacancies') }}">Получить вакансии выше средней зарплаты</a>
+    </div>
+    <div>
+        <a href="{{ url_for('vacancies_with_keyword') }}">Поиск по ключевому слову</a>
+    </div>
+    <div>
+        <a href="{{ url_for('add_vacancies') }}">Добавить вакансию</a>
+    </div>
+</body>
+</html>
