@@ -16,7 +16,12 @@ class MongoManager:
         """
         return list(self._collection.find())[0].get("employers_id")
 
-    def add_vacancies(self, employer_id):
+    def add_employer(self, employer_id):
         self._collection.update_one(
             {"_id": ObjectId(object_id)}, {"$push": {"employers_id": employer_id}}
+        )
+
+    def delete_employer(self, employer_id):
+        self._collection.update_one(
+            {"_id": ObjectId(object_id)}, {"$pull": {"employers_id": employer_id}}
         )
