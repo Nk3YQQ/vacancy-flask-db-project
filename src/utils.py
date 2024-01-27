@@ -1,4 +1,7 @@
-def make_salary(salary: dict) -> int:
+from typing import Any
+
+
+def make_salary(salary: dict) -> int | None:
     """
     Функция принимает словарь, берёт данные из блока "Зарплата" и преобразует в строку
     """
@@ -12,13 +15,13 @@ def make_salary(salary: dict) -> int:
         return round(int(salary["to"]) + int(salary["from"]) / 2)
 
 
-def check_salary(salary):
+def check_salary(salary) -> int | str:
     if not salary:
         return "Нет данных"
     return salary
 
 
-def handle_array(array):
+def handle_array(array: list[Any]) -> list[dict]:
     return list(
         map(
             lambda x: {
@@ -32,13 +35,13 @@ def handle_array(array):
     )
 
 
-def validate(employer_id, employers):
-    errors = {}
+def validate(employer_id: Any, employers: list[int]) -> dict:
+    errors: dict = {}
 
-    if employer_id == '' or not employer_id:
-        errors['employers'] = 'Поле не может быть пустым'
+    if employer_id == "" or not employer_id:
+        errors["employers"] = "Поле не может быть пустым"
 
     if employer_id in employers:
-        errors['employers'] = 'Данный работодатель уже находится в базе данных'
+        errors["employers"] = "Данный работодатель уже находится в базе данных"
 
     return errors
