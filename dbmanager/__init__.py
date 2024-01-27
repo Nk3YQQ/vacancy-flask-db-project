@@ -8,12 +8,12 @@ logger = logging.getLogger(__name__)
 
 
 class DBManager:
-    def __init__(self, session, employer_model, vacancy_model):
+    def __init__(self, session, employer_model, vacancy_model) -> None:
         self._session = session
         self._employer_model = employer_model
         self._vacancy_model = vacancy_model
 
-    def get_all_vacancies(self):
+    def get_all_vacancies(self) -> list[dict]:
         with self._session() as session:
             query = (
                 session.query(
@@ -26,10 +26,10 @@ class DBManager:
                 .order_by(nullslast(desc(self._vacancy_model.salary)))
                 .all()
             )
-            logger.info('All vacancies was gotten.')
+            logger.info("All vacancies was gotten.")
             return handle_array(query)
 
-    def get_companies_and_vacancies_count(self):
+    def get_companies_and_vacancies_count(self) -> list[dict]:
         with self._session() as session:
             query = (
                 session.query(
@@ -41,15 +41,15 @@ class DBManager:
                 .order_by(nullslast(desc(func.count(self._vacancy_model.vacancy_id))))
                 .all()
             )
-            logger.info('All companies with vacancies was gotten.')
+            logger.info("All companies with vacancies was gotten.")
             return list(map(lambda x: {"name": x[0], "vacancies": x[1]}, query))
 
-    def get_avg_salary(self):
+    def get_avg_salary(self) -> int:
         with self._session() as session:
-            logger.info('Average salary was gotten.')
+            logger.info("Average salary was gotten.")
             return round(session.query(func.avg(self._vacancy_model.salary)).scalar())
 
-    def get_vacancies_with_higher_salary(self):
+    def get_vacancies_with_higher_salary(self) -> list[dict]:
         with self._session() as session:
             average_salary = self.get_avg_salary()
             high_salary_vacancies = (
@@ -64,10 +64,10 @@ class DBManager:
                 .order_by(nullslast(desc(self._vacancy_model.salary)))
                 .all()
             )
-            logger.info('Vacancies with higher, then average salary was gotten.')
+            logger.info("Vacancies with higher, then average salary was gotten.")
             return handle_array(high_salary_vacancies)
 
-    def get_vacancies_with_keyword(self, keyword):
+    def get_vacancies_with_keyword(self, keyword) -> list[dict]:
         with self._session() as session:
             query = (
                 session.query(
