@@ -21,6 +21,7 @@ class MongoEngineSettings:
     host: str
     db_name: str
     collection_name: str
+    employers_object_id: str
 
 
 @dataclass
@@ -50,6 +51,7 @@ def get_engine_settings(path: Path) -> Settings:
             host=env.str("MONGODB_HOST"),
             db_name=env.str("DATABASE_NAME"),
             collection_name=env.str("COLLECTION_NAME"),
+            employers_object_id=env.str("EMPLOYERS_OBJECT_ID"),
         ),
     )
 
@@ -68,3 +70,4 @@ ENGINE_URL = create_engine_url(SETTINGS.sql_engine_settings)
 sql_engine = create_engine(ENGINE_URL)
 
 mongo_settings = SETTINGS.mongo_engine_settings
+object_id = mongo_settings.employers_object_id

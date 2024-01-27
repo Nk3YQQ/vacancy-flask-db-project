@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Добавить вакансию</title>
+</head>
+<body>
+    <form action="{{ url_for('add_employer') }}" method="post">
+        <div>
+            <label>
+                Добавьте вакансии, написав id компании на hh.ru
+                <input type="search" name="id" value="{{ employer_id }}">
+            </label>
+            {% if errors['employers'] %}
+                <div>{{ errors['employers'] }}</div>
+            {% endif %}
+        </div>
+        <input type="submit" value="Добавить">
+    </form>
+</body>
+</html>
