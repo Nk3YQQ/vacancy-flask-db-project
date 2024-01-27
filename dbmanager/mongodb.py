@@ -10,18 +10,14 @@ class MongoManager:
         self._db = self._con[mongo_settings.db_name]
         self._collection = self._db[mongo_settings.collection_name]
 
-    def get_employers_id(self) -> list:
+    def get_employers_id(self) -> list[int]:
         """
         Метод возвращает список с id работодателей hh.ru
         """
         return list(self._collection.find())[0].get("employers_id")
 
-    def add_employer(self, employer_id):
-        self._collection.update_one(
-            {"_id": ObjectId(object_id)}, {"$push": {"employers_id": employer_id}}
-        )
+    def add_employer(self, employer_id) -> None:
+        self._collection.update_one({"_id": ObjectId(object_id)}, {"$push": {"employers_id": employer_id}})
 
-    def delete_employer(self, employer_id):
-        self._collection.update_one(
-            {"_id": ObjectId(object_id)}, {"$pull": {"employers_id": employer_id}}
-        )
+    def delete_employer(self, employer_id) -> None:
+        self._collection.update_one({"_id": ObjectId(object_id)}, {"$pull": {"employers_id": employer_id}})
