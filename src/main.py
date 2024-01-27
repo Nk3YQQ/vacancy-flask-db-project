@@ -4,10 +4,10 @@ from sqlalchemy.orm import sessionmaker
 from dbmanager import DBManager
 from dbmanager.mongodb import MongoManager
 from handler import Router
+from logger import setup_logging
 from models import Employer, Vacancy
 from repository import EmployerRepository, VacancyRepository
 from settings.basic import mongo_settings, sql_engine
-from logger import setup_logging
 
 logger = setup_logging()
 
@@ -37,13 +37,11 @@ app.add_url_rule(
     "high_salary_vacancies",
     router.vacancies_with_higher_salary,
 )
-app.add_url_rule(
-    "/vacancies_with_keyword", "vacancies_with_keyword", router.vacancies_with_keyword
-)
-app.add_url_rule("/add_employer", "add_employer", router.add_employer, methods=['GET', 'POST'])
-app.add_url_rule('/add_new_employer', 'add_new_employer', router.add_new_employer)
+app.add_url_rule("/vacancies_with_keyword", "vacancies_with_keyword", router.vacancies_with_keyword)
+app.add_url_rule("/add_employer", "add_employer", router.add_employer, methods=["GET", "POST"])
+app.add_url_rule("/add_new_employer", "add_new_employer", router.add_new_employer)
 
 
 if __name__ == "__main__":
-    logger.info('Start app...')
+    logger.info("Start app...")
     app.run(debug=True, port=5000)
