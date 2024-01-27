@@ -30,3 +30,15 @@ def handle_array(array):
             array,
         )
     )
+
+
+def validate(employer_id, employers):
+    errors = {}
+
+    if employer_id == '' or not employer_id:
+        errors['employers'] = 'Поле не может быть пустым'
+
+    if employer_id in employers:
+        errors['employers'] = 'Данный работодатель уже находится в базе данных'
+
+    return errors
