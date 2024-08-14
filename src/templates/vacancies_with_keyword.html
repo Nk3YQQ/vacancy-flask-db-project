@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Вакансии по ключевому слову</title>
+</head>
+<body>
+  <form action="{{ url_for('vacancies_with_keyword') }}" method="get">
+    <input type="search" name="vacancy" value="{{ keyword }}">
+    <input type="submit" value="Поиск">
+  </form>
+  <table>
+    <tr>
+        <th>Название вакансии</th>
+        <th>Компания</th>
+        <th>Зарплата</th>
+        <th>Требования</th>
+    </tr>
+    {% for vacancy in vacancies %}
+      <tr>
+          <td>{{ vacancy.vacancy_name }}</td>
+          <td>{{ vacancy.employer_name }}</td>
+          <td>{{ vacancy.salary }}</td>
+          <td>{{ vacancy.requirements }}</td>
+      </tr>
+      {% endfor %}
+  </table>
+</body>
+</html>
